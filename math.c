@@ -1,7 +1,7 @@
 /* $XConsortium: math.c,v 1.17 91/07/25 17:51:34 rws Exp $
  * $MIT: contrib/programs/xcalc/math.c,v 3.2 1999/12/14 18:53:00 gjcoram Exp$
  * $XFree86: xc/programs/xcalc/math.c,v 1.5tsi Exp $ 
- * $XdotOrg: $
+ * $XdotOrg: xc/programs/xcalc/math.c,v 1.3 2004/05/23 20:03:49 alanc Exp $
  *
  *  math.c  -  mathematics functions for a hand calculator under X
  *
@@ -400,10 +400,14 @@ bkspf(void)
       if (clrdisp)
 	  return;
       if ((int) strlen(dispstr) > 0) {
-	  if (dispstr[strlen(dispstr)-1] == '.')
+#ifndef X_LOCALE
+          const char *dp = localeconv()->decimal_point;
+          size_t dp_len = strlen(dp);
+          size_t ds_len = strlen(dispstr);
+          if (ds_len >= dp_len && strcmp(dispstr + ds_len - dp_len, dp) == 0)
              Dpoint=0;
-#ifdef X_LOCALE
-	  if (dispstr[strlen(dispstr)-1] == localeconv()->decimal_point)
+#else
+	  if (dispstr[strlen(dispstr)-1] == '.')
              Dpoint=0;
 #endif	  
 	  dispstr[strlen(dispstr)-1] = 0;
