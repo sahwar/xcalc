@@ -43,8 +43,9 @@ APPDEFAULTFILES = \
         XCalc \
         XCalc-col
 
+SUFFIXES = .ad 
 
-$(APPDEFAULTFILES): %: %.ad
+.ad:
 	cp $< $@
 
 appdefault_DATA = $(APPDEFAULTFILES)
