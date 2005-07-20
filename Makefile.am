@@ -21,8 +21,8 @@
 
 bin_PROGRAMS = xcalc
 
-xcalc_CFLAGS = $(DEP_CFLAGS)
-xcalc_LDADD = $(DEP_LIBS) -lm
+xcalc_CFLAGS = $(XCALC_CFLAGS)
+xcalc_LDADD = $(XCALC_LIBS) -lm
 
 xcalc_SOURCES =	\
         actions.c \
