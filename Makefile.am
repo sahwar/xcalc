@@ -31,7 +31,7 @@ xcalc_SOURCES =	\
         xcalc.c \
         xcalc.h
 
-dist_man_MANS = \
+dist_man1_MANS = \
         xcalc.man
 
 # App default files  (*.ad)
