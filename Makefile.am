@@ -1,3 +1,4 @@
+# $Id$
 # 
 #  Copyright 2005  Red Hat, Inc.
 # 
@@ -41,7 +42,7 @@ appdefaultdir = $(sysconfdir)/X11/app-defaults
 
 APPDEFAULTFILES = \
         XCalc \
-        XCalc-col
+        XCalc-color
 
 SUFFIXES = .ad 
 
