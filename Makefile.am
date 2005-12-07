@@ -37,7 +37,7 @@ appman_PRE = \
 
 # App default files  (*.ad)
 
-appdefaultdir = $(libdir)/X11/app-defaults
+appdefaultdir = @appdefaultdir@
 
 
 APPDEFAULTFILES = \
