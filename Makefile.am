@@ -22,7 +22,7 @@
 
 bin_PROGRAMS = xcalc
 
-xcalc_CFLAGS = $(XCALC_CFLAGS)
+AM_CFLAGS = $(XCALC_CFLAGS)
 xcalc_LDADD = $(XCALC_LIBS) -lm
 
 xcalc_SOURCES =	\
