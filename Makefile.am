@@ -1,4 +1,3 @@
-# $Id$
 # 
 #  Copyright 2005  Red Hat, Inc.
 # 
