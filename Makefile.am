@@ -40,8 +40,8 @@ appdefaultdir = @appdefaultdir@
 
 
 APPDEFAULTFILES = \
-        XCalc \
-        XCalc-color
+        app-defaults/XCalc \
+        app-defaults/XCalc-color
 
 SUFFIXES = .ad 
 
