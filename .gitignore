@@ -20,3 +20,7 @@ stamp-h1
 xcalc
 xcalc.1
 *~
+*.o
+xcalc-*.tar.*
+ChangeLog
+tags
