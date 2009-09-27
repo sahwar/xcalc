@@ -43,7 +43,7 @@ dist_appdefault_DATA = \
         app-defaults/XCalc \
         app-defaults/XCalc-color
 
-EXTRA_DIST = ChangeLog autogen.sh
+EXTRA_DIST = ChangeLog
 
 MAINTAINERCLEANFILES = ChangeLog
 
