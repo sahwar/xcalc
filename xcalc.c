@@ -1,4 +1,3 @@
-/* $XConsortium: xcalc.c,v 1.16 94/04/17 20:43:31 converse Exp $ */
 /*
 
 Copyright (c) 1989  X Consortium
@@ -28,7 +27,6 @@ other dealings in this Software without prior written authorization
 from the X Consortium.
 
 */
-/* $XFree86$ */
 
 /*
  * xcalc.c  -  a hand calculator for the X Window system
