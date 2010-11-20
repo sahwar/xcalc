@@ -35,13 +35,8 @@ XORG_DEFAULT_OPTIONS
 
 AM_CONFIG_HEADER(config.h)
 
-AC_PROG_CC
-AC_PROG_INSTALL
-
-
+# Checks for pkg-config packages
 PKG_CHECK_MODULES(XCALC, xaw7)
-AC_SUBST(XCALC_CFLAGS)
-AC_SUBST(XCALC_LIBS)
 
 PKG_CHECK_MODULES(APPDEFS, xt)
 xt_appdefaultdir=`$PKG_CONFIG --variable=appdefaultdir xt`
