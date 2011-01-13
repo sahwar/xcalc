@@ -420,7 +420,7 @@ customization file:
 .IR __apploaddir__/XCalc-color .
 .fi
 .SH "SEE ALSO"
-X(__miscmansuffix__), xrdb(1), the Athena Widget Set
+X(__miscmansuffix__), xrdb(__appmansuffix__), the Athena Widget Set
 .SH BUGS
 .PP
 HP mode is not completely debugged.  In particular, the stack is
