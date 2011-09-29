@@ -109,7 +109,7 @@ static int    priority(int op);
  */
 
 static void
-parse_double (char *src, char *fmt, double *dp)
+parse_double (const char *src, const char *fmt, double *dp)
 {
     int olderrno = errno;
 
