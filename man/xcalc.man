@@ -1,3 +1,4 @@
+.\" t
 .\" Copyright (c) 1994  X Consortium
 .\"
 .\" Permission is hereby granted, free of charge, to any person obtaining
@@ -292,48 +293,48 @@ The numeric keypad accelerators provided by \fIxcalc\fP
 should be intuitively correct.
 The accelerators defined by \fIxcalc\fP on the main keyboard are given below:
 .PP
-.nf
-.ta .5i 1.0i 1.5i 2.0i 2.5i 3.0i 3.5i 4.0i 4.5i 5.0i 5.5i 6.0i 6.5i 7.0i
-	TI Key	HP Key	Keyboard Accelerator	TI Function	HP Function
+.TS
+l l l l l.
+TI Key	HP Key	Keyboard Accelerator	TI Function	HP Function
+_
+SQRT	SQRT	r	squareRoot()	squareRoot()
+AC	ON	space	clear()	clear()
+AC	<-	Delete	clear()	back()
+AC	<-	Backspace	clear()	back()
+AC	<-	Control-H	clear()	back()
+AC		Clear	clear()
+AC	ON	q	quit()	quit()
+AC	ON	Control-C	quit()	quit()
 
-	SQRT	SQRT	r			squareRoot()	squareRoot()
-	AC	ON	space			clear()		clear()
-	AC	<-	Delete			clear()		back()
-	AC	<-	Backspace		clear()		back()
-	AC	<-	Control-H		clear()		back()
-	AC		Clear			clear()
-	AC	ON	q			quit()		quit()
-	AC	ON	Control-C		quit()		quit()
+INV	i	i	inverse()	inverse()
+sin	s	s	sine()	sine()
+cos	c	c	cosine()	cosine()
+tan	t	t	tangent()	tangent()
+DRG	DRG	d	degree()	degree()
 
-	INV	i	i			inverse()		inverse()
-	sin	s	s			sine()		sine()
-	cos	c	c			cosine()		cosine()
-	tan	t	t			tangent()	tangent()
-	DRG	DRG	d			degree()		degree()
+e		e	e()
+ln	ln	l	naturalLog()	naturalLog()
+y^x	y^x	^	power()	power()
 
-	e		e			e()
-	ln	ln	l			naturalLog()	naturalLog()
-	y^x	y^x	^			power()		power()
+PI	PI	p	pi()	pi()
+x!	x!	!	factorial()	factorial()
+(		(	leftParen()
+)		)	rightParen()
 
-	PI	PI	p			pi()		pi()
-	x!	x!	!			factorial()	factorial()
-	(		(			leftParen()
-	)		)			rightParen()
+/	/	/	divide()	divide()
+*	*	*	multiply()	multiply()
+-	-	-	subtract()	subtract()
++	+	+	add()	add()
+\&=		\&=	equal()
 
-	/	/	/			divide()		divide()
-	*	*	*			multiply()	multiply()
-	-	-	-			subtract()	subtract()
-	+	+	+			add()		add()
-	=		=			equal()
+0..9	0..9	0..9	digit()	digit()
+.	.	.	decimal()	decimal()
++/-	CHS	n	negate()	negate()
 
-	0..9	0..9	0..9			digit()		digit()
-	.	.	.			decimal()	decimal()
-	+/-	CHS	n			negate()		negate()
-
-		x:y	x					XexchangeY()
-		ENTR	Return					enter()
-		ENTR	Linefeed					enter()
-.fi
+	x:y	x		XexchangeY()
+	ENTR	Return		enter()
+	ENTR	Linefeed		enter()
+.TE
 .PP
 .SH CUSTOMIZATION
 The application class name is XCalc.
@@ -373,26 +374,26 @@ the widgets which compose \fIxcalc\fR.  In the notation below,
 indentation indicates hierarchical structure.  The widget class name
 is given first, followed by the widget instance name.
 .nf
-.ta .5i 1.0i 1.5i 2.0i 2.5i 3.0i 3.5i 4.0i 4.5i 5.0i 5.5i 6.0i 6.5i 7.0i
-.sp
+.ft CW
 XCalc xcalc
-	Form  ti  \fIor\fR  hp    \fI(the name depends on the mode)\fR
-		Form  bevel
-			Form  screen
-				Label  M
-				Toggle  LCD
-				Label  INV
-				Label  DEG
-				Label  RAD
-				Label  GRAD
-				Label  P
-		Command  button1
-		Command  button2
-		Command  button3
+        Form  ti  \fIor\fR  hp    \fI(the name depends on the mode)\fR
+                Form  bevel
+                        Form  screen
+                                Label  M
+                                Toggle  LCD
+                                Label  INV
+                                Label  DEG
+                                Label  RAD
+                                Label  GRAD
+                                Label  P
+                Command  button1
+                Command  button2
+                Command  button3
 \fIand so on, ...\fR
-		Command  button38
-		Command  button39
-		Command  button40
+                Command  button38
+                Command  button39
+                Command  button40
+.ft
 .fi
 .SH APPLICATION RESOURCES
 .PP
@@ -435,3 +436,10 @@ John Bradley, University of Pennsylvania
 Mark Rosenstein, MIT Project Athena
 .br
 Donna Converse, MIT X Consortium
+.\" --------------------------------------------------------------------
+.\" Emacs settings
+.\" --------------------------------------------------------------------
+.\" Local Variables:
+.\" mode: nroff
+.\" tab-width: 15
+.\" End:
