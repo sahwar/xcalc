@@ -18,33 +18,6 @@
 
 #include "xcalc.h"
 
-#ifdef _CRAY		/* kludge around Cray STDC compiler */
-double (*log_p)() = log;
-#define log ((*log_p))
-double (*exp_p)() = exp;
-#define exp ((*exp_p))
-double (*sqrt_p)() = sqrt;
-#define sqrt ((*sqrt_p))
-double (*log10_p)() = log10;
-#define log10 ((*log10_p))
-double (*atan2_p)() = atan2;
-#define atan2 ((*atan2_p))
-double (*asin_p)() = asin;
-#define asin ((*asin_p))
-double (*acos_p)() = acos;
-#define acos ((*acos_p))
-double (*atan_p)() = atan;
-#define atan ((*atan_p))
-double (*sin_p)() = sin;
-#define sin ((*sin_p))
-double (*cos_p)() = cos;
-#define cos ((*cos_p))
-double (*tan_p)() = tan;
-#define tan ((*tan_p))
-double (*pow_p)() = pow;
-#define pow ((*pow_p))
-#endif /* _CRAY */
-
 #ifndef PI		/* sometimes defined in math.h */
 #define PI          3.14159265358979
 #endif
