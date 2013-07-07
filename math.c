@@ -18,8 +18,8 @@
 
 #include "xcalc.h"
 
-#ifndef PI		/* sometimes defined in math.h */
-#define PI          3.14159265358979
+#ifndef M_PI        /* sometimes defined in math.h */
+#define M_PI        3.14159265358979323846
 #endif
 #define E           2.71828182845904
 #define MAXDISP     11
@@ -42,8 +42,8 @@ jmp_buf env;
 
 static int flagINV, flagPAREN, flagM, drgmode;	/* display flags */
 
-static double drg2rad=PI/180.0;  /* Conversion factors for trig funcs */
-static double rad2drg=180.0/PI;
+static double drg2rad=M_PI/180.0;  /* Conversion factors for trig funcs */
+static double rad2drg=180.0/M_PI;
 static int entered=1;  /* true if display contains a valid number.
                           if==2, then use 'dnum', rather than the string
                           stored in the display.  (for accuracy)
@@ -633,8 +633,8 @@ drgf(void)
     if (entered==1)
       parse_double(dispstr,"%lf",&dnum);
     switch (drgmode) {
-    case DEG:  dnum=dnum*PI/180.0;    break;
-    case RAD:  dnum=dnum*200.0/PI;    break;
+    case DEG:  dnum=dnum*M_PI/180.0;    break;
+    case RAD:  dnum=dnum*200.0/M_PI;    break;
     case GRAD: dnum=dnum*90.0/100.0;  break;
     }
     entered=2;
@@ -646,14 +646,14 @@ drgf(void)
   flagINV=0;
   drgmode = (drgmode + 1) % 3;
   switch (drgmode) {
-  case DEG:  drg2rad=PI / 180.0;
-	     rad2drg=180.0 / PI;
+  case DEG:  drg2rad=M_PI / 180.0;
+	     rad2drg=180.0 / M_PI;
 	     break;
   case RAD:  drg2rad=1.0;
 	     rad2drg=1.0;
 	     break;
-  case GRAD: drg2rad=PI / 200.0;
-	     rad2drg=200.0 / PI;
+  case GRAD: drg2rad=M_PI / 200.0;
+	     rad2drg=200.0 / M_PI;
 	     break;
   }
   DrawDisplay();
@@ -689,7 +689,7 @@ oneop(int keynum)
 
   switch (keynum) {  /* do the actual math fn. */
   case kE:     if (rpn && memop != kENTR) PushNum(dnum); dnum=E;  break;
-  case kPI:    if (rpn && memop != kENTR) PushNum(dnum); dnum=PI;  break;
+  case kPI:    if (rpn && memop != kENTR) PushNum(dnum); dnum=M_PI;  break;
   case kRECIP: dnum=1.0/dnum;  break;
   case kSQR:   flagINV = !flagINV; /* fall through to */
   case kSQRT:  if (flagINV) dnum=dnum*dnum;
@@ -908,6 +908,6 @@ ResetCalc(void)
     strcpy(dispstr,"0");
     draw(dispstr);
     ClearStacks();
-    drg2rad=PI/180.0;
-    rad2drg=180.0/PI;
+    drg2rad=M_PI/180.0;
+    rad2drg=180.0/M_PI;
 }
