@@ -21,7 +21,11 @@
 #ifndef M_PI        /* sometimes defined in math.h */
 #define M_PI        3.14159265358979323846
 #endif
-#define E           2.71828182845904
+
+#ifndef M_E         /* sometimes defined in math.h */
+#define M_E           2.7182818284590452354
+#endif
+
 #define MAXDISP     11
 #define DEG 0		/* DRG mode.  used for trig calculations */
 #define RAD 1
@@ -688,7 +692,7 @@ oneop(int keynum)
   entered = 2;
 
   switch (keynum) {  /* do the actual math fn. */
-  case kE:     if (rpn && memop != kENTR) PushNum(dnum); dnum=E;  break;
+  case kE:     if (rpn && memop != kENTR) PushNum(dnum); dnum=M_E;  break;
   case kPI:    if (rpn && memop != kENTR) PushNum(dnum); dnum=M_PI;  break;
   case kRECIP: dnum=1.0/dnum;  break;
   case kSQR:   flagINV = !flagINV; /* fall through to */
