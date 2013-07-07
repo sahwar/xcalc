@@ -30,8 +30,7 @@
 #define DEG 0		/* DRG mode.  used for trig calculations */
 #define RAD 1
 #define GRAD 2
-#define min(a,b) ((a) < (b) ? (a) : (b))
-#define max(a,b) ((a) > (b) ? (a) : (b))
+
 #define True	1
 #define False   0
 
