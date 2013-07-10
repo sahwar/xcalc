@@ -38,6 +38,8 @@ m4_ifndef([XORG_MACROS_VERSION],
 XORG_MACROS_VERSION(1.8)
 XORG_DEFAULT_OPTIONS
 
+AC_CHECK_FUNCS([strlcpy])
+
 # Checks for pkg-config packages
 PKG_CHECK_MODULES(XCALC, xaw7 xt x11)
 

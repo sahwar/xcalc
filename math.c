@@ -78,6 +78,17 @@ static void   RollNum(int dir);
 static void   ClearStacks(void);
 static int    priority(int op);
 
+#ifndef HAVE_STRLCPY
+/* Close enough for the short strings copied in xcalc */
+static inline size_t
+strlcpy(char *dst, const char *src, size_t size)
+{
+    strncpy(dst, src, size);
+    dst[size - 1] = '\0';
+    return strlen(src);
+}
+#endif
+
 /*
  * The following is to deal with the unfortunate assumption that if errno
  * is non-zero then an error has occurred.  On some systems (e.g. Ultrix),
@@ -123,9 +134,9 @@ static volatile int SignalKind;
 void fail_op(void)
 {
     if (SignalKind == SIGFPE)
-	strcpy(dispstr, "math error");
+	strlcpy(dispstr, "math error", sizeof(dispstr));
     else if (SignalKind == SIGILL)
-	strcpy(dispstr, "illegal operand");
+	strlcpy(dispstr, "illegal operand", sizeof(dispstr));
 
     entered=3;
     DrawDisplay();
@@ -163,7 +174,7 @@ void post_op(void)
 #endif
 #ifndef IEEE
     if (errno) {
-        strcpy(dispstr,"error");
+        strlcpy(dispstr, "error", sizeof(dispstr));
         DrawDisplay();
         entered=3;
         errno=0;
@@ -174,19 +185,18 @@ void post_op(void)
 static void
 DrawDisplay(void)
 {
-    if ((int) strlen(dispstr) > 12) {	 /* strip out some decimal digits */
-        char tmp[32];
+    if (strlen(dispstr) > 12) {           /* strip out some decimal digits */
         char *estr = index(dispstr,'e');  /* search for exponent part */
         if (!estr) dispstr[12]='\0';      /* no exp, just trunc. */
         else {
-            if ((int) strlen(estr) <= 4)
-                sprintf(tmp,"%.8s",dispstr); /* leftmost 8 chars */
-            else
-                sprintf(tmp,"%.7s",dispstr); /* leftmost 7 chars */
-            strcat (tmp,estr);            /* plus exponent */
-            strcpy (dispstr,tmp);
-            }
+            char tmp[32];
+            if (strlen(estr) <= 4)        /* leftmost 8 chars plus exponent */
+                snprintf(tmp, sizeof(tmp), "%.8s%s", dispstr, estr);
+            else                          /* leftmost 7 chars plus exponent */
+                snprintf(tmp, sizeof(tmp), "%.7s%s", dispstr, estr);
+            strlcpy(dispstr, tmp, sizeof(dispstr));
         }
+    }
     draw(dispstr);
     setflag(XCalc_MEMORY, (flagM));
     setflag(XCalc_INVERSE, (flagINV));
@@ -228,7 +238,7 @@ numeric(int keynum)
       case kRCL:
 	PushNum(dnum);
 	dnum = mem[cell];
-	sprintf(dispstr, "%.8g", dnum);
+	snprintf(dispstr, sizeof(dispstr), "%.8g", dnum);
 	lift_enabled = 1;
         entered = 1;
 	clrdisp++;
@@ -314,7 +324,7 @@ bkspf(void)
   }
   else
   {
-      strcpy(dispstr, "0");
+      strlcpy(dispstr, "0", sizeof(dispstr));
       dnum = 0.0;
       clrdisp++;
       flagINV = 0;
@@ -329,7 +339,7 @@ decf(void)
   if (clrdisp) {
       if (rpn && lift_enabled)
 	PushNum(dnum);
-      strcpy(dispstr,"0");
+      strlcpy(dispstr, "0", sizeof(dispstr));
   }
   if (!Dpoint) {
 #ifndef X_LOCALE
@@ -351,7 +361,7 @@ eef(void)
   if (clrdisp) {
       if (rpn && lift_enabled)
 	PushNum(dnum);
-      strcpy(dispstr, rpn ? "1" : "0");
+      strlcpy(dispstr, rpn ? "1" : "0", sizeof(dispstr));
   }
   if (!exponent) {
     strcat(dispstr,"E+");
@@ -374,7 +384,7 @@ clearf(void)
   exponent=Dpoint=0;
   clrdisp=1;
   entered=1;
-  strcpy(dispstr,"0");
+  strlcpy(dispstr, "0", sizeof(dispstr));
   DrawDisplay();
 }
 
@@ -397,8 +407,8 @@ negf(void)
     strcpy(dispstr,dispstr+1);  /* move str left once */
   else {			/* not neg-ed.  add a '-' */
     char tmp[32];
-    sprintf(tmp,"-%s",dispstr);
-    strcpy(dispstr,tmp);
+    snprintf(tmp, sizeof(tmp), "-%s", dispstr);
+    strlcpy(dispstr, tmp, sizeof(dispstr));
   }
   if (entered==2)
     dnum = -1.0 * dnum;
@@ -458,7 +468,7 @@ twoop(int keynum)
 	}
       PushNum(acc);
       PushOp(keynum);
-      sprintf(dispstr,"%.8g",acc);
+      snprintf(dispstr, sizeof(dispstr), "%.8g", acc);
       DrawDisplay();
       dnum=acc;
     }
@@ -490,7 +500,7 @@ twof(int keynum)
   case kPOW: acc =  pow(acc,dnum);  break;
   case kXXY: PushNum(dnum);
   }
-  sprintf(dispstr, "%.8g", acc);
+  snprintf(dispstr, sizeof(dispstr), "%.8g", acc);
   DrawDisplay();
   clrdisp++;
   Dpoint = exponent = 0;
@@ -556,7 +566,7 @@ equf(void)
     PushNum(dnum);
   }
 
-  sprintf(dispstr,"%.8g",dnum);
+  snprintf(dispstr, sizeof(dispstr), "%.8g", dnum);
   DrawDisplay();
 }
 
@@ -581,7 +591,7 @@ rollf(void)
   RollNum(flagINV);
   flagINV=0;
   clrdisp++;
-  sprintf(dispstr, "%.8g", dnum);
+  snprintf(dispstr, sizeof(dispstr), "%.8g", dnum);
   DrawDisplay();
 }
 
@@ -625,7 +635,7 @@ rparf(void)
   (void) PopNum();
   flagPAREN--;
   entered=2;
-  sprintf(dispstr,"%.8g",dnum);
+  snprintf(dispstr, sizeof(dispstr), "%.8g", dnum);
   DrawDisplay();
 }
 
@@ -643,7 +653,7 @@ drgf(void)
     entered=2;
     clrdisp=1;
     flagINV=0;
-    sprintf(dispstr,"%.8g",dnum);
+    snprintf(dispstr, sizeof(dispstr), "%.8g", dnum);
   }
 
   flagINV=0;
@@ -722,7 +732,7 @@ oneop(int keynum)
   case kEXC:   dtmp=dnum; dnum=mem[0];  mem[0]=dtmp;
 	       flagM=!(mem[0]==0.0);  break;
   case kFACT:  if (floor(dnum)!=dnum || dnum<0.0 || dnum>500.0) {
-		 strcpy(dispstr,"error");
+                 strlcpy(dispstr, "error", sizeof(dispstr));
 		 entered=3;
 		 break;
 	       }
@@ -742,7 +752,7 @@ oneop(int keynum)
   clrdisp=1;
   flagINV=0;
   lift_enabled = 1;
-  sprintf(dispstr,"%.8g",dnum);
+  snprintf(dispstr, sizeof(dispstr), "%.8g", dnum);
   DrawDisplay();
 }
 
@@ -775,8 +785,11 @@ static void
 PushOp(int op)
 /*******/
 {
-  if (opsp==STACKMAX) {strcpy(dispstr,"stack error");  entered=3;}
-  else opstack[opsp++]=op;
+  if (opsp==STACKMAX) {
+      strlcpy(dispstr, "stack error", sizeof(dispstr));
+      entered=3;
+  } else
+      opstack[opsp++]=op;
 }
 
 /*******/
@@ -785,7 +798,7 @@ PopOp(void)
 /*******/
 {
   if (opsp==0) {
-      strcpy(dispstr,"stack error");
+      strlcpy(dispstr, "stack error", sizeof(dispstr));
       entered=3;
       return(kNOP);
   } else
@@ -821,7 +834,7 @@ PushNum(double num)
       return;
   }
   if (numsp==STACKMAX) {
-      strcpy(dispstr,"stack error");
+      strlcpy(dispstr, "stack error", sizeof(dispstr));
       entered=3;
   } else
     numstack[numsp++]=num;
@@ -839,7 +852,7 @@ PopNum(void)
 	return(tmp);
     }
     if (numsp==0) {
-	strcpy(dispstr,"stack error");
+	strlcpy(dispstr, "stack error", sizeof(dispstr));
 	entered=3;
 	return 0.0;
     } else
@@ -908,7 +921,7 @@ ResetCalc(void)
     setflag(XCalc_RADIAN, False);
     setflag(XCalc_GRADAM, False);
     setflag(XCalc_DEGREE, True);
-    strcpy(dispstr,"0");
+    strlcpy(dispstr, "0", sizeof(dispstr));
     draw(dispstr);
     ClearStacks();
     drg2rad=M_PI/180.0;
