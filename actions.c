@@ -65,7 +65,6 @@ static void leftParen(Widget w, XEvent *e, String *vector, Cardinal *count);
 static void logarithm(Widget w, XEvent *e, String *vector, Cardinal *count);
 static void multiply(Widget w, XEvent *e, String *vector, Cardinal *count);
 static void naturalLog(Widget w, XEvent *e, String *vector, Cardinal *count);
-static void factorial(Widget w, XEvent *e, String *vector, Cardinal *count);
 static void negate(Widget w, XEvent *e, String *vector, Cardinal *count);
 static void nop(Widget w, XEvent *e, String *vector, Cardinal *count);
 static void off(Widget w, XEvent *e, String *vector, Cardinal *count);
