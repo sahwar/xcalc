@@ -45,47 +45,47 @@ from the X Consortium.
 #define XCALC_PRE_OP(keynum) if (pre_op(keynum)) return;
 #endif
 
-static void add(Widget w, XEvent *e, String *vector, Cardinal *count);
-static void back(Widget w, XEvent *e, String *vector, Cardinal *count);
-static void bell(Widget w, XEvent *e, String *vector, Cardinal *count);
-static void clearit(Widget w, XEvent *e, String *vector, Cardinal *count);
-static void cosine(Widget w, XEvent *e, String *vector, Cardinal *count);
-static void decimal(Widget w, XEvent *e, String *vector, Cardinal *count);
-static void degree(Widget w, XEvent *e, String *vector, Cardinal *count);
-static void digit(Widget w, XEvent *e, String *vector, Cardinal *count);
-static void divide(Widget w, XEvent *e, String *vector, Cardinal *count);
-static void e(Widget w, XEvent *e, String *vector, Cardinal *count);
-static void enter(Widget w, XEvent *e, String *vector, Cardinal *count);
-static void epower(Widget w, XEvent *e, String *vector, Cardinal *count);
-static void equal(Widget w, XEvent *e, String *vector, Cardinal *count);
-static void exchange(Widget w, XEvent *e, String *vector, Cardinal *count);
-static void factorial(Widget w, XEvent *e, String *vector, Cardinal *count);
-static void inverse(Widget w, XEvent *e, String *vector, Cardinal *count);
-static void leftParen(Widget w, XEvent *e, String *vector, Cardinal *count);
-static void logarithm(Widget w, XEvent *e, String *vector, Cardinal *count);
-static void multiply(Widget w, XEvent *e, String *vector, Cardinal *count);
-static void naturalLog(Widget w, XEvent *e, String *vector, Cardinal *count);
-static void negate(Widget w, XEvent *e, String *vector, Cardinal *count);
-static void nop(Widget w, XEvent *e, String *vector, Cardinal *count);
-static void off(Widget w, XEvent *e, String *vector, Cardinal *count);
-static void pi(Widget w, XEvent *e, String *vector, Cardinal *count);
-static void power(Widget w, XEvent *e, String *vector, Cardinal *count);
-static void quit(Widget w, XEvent *e, String *vector, Cardinal *count);
-static void recall(Widget w, XEvent *e, String *vector, Cardinal *count);
-static void reciprocal(Widget w, XEvent *e, String *vector, Cardinal *count);
-static void rightParen(Widget w, XEvent *e, String *vector, Cardinal *count);
-static void roll(Widget w, XEvent *e, String *vector, Cardinal *count);
-static void scientific(Widget w, XEvent *e, String *vector, Cardinal *count);
-static void selection(Widget w, XEvent *e, String *vector, Cardinal *count);
-static void sine(Widget w, XEvent *e, String *vector, Cardinal *count);
-static void square(Widget w, XEvent *e, String *vector, Cardinal *count);
-static void squareRoot(Widget w, XEvent *e, String *vector, Cardinal *count);
-static void store(Widget w, XEvent *e, String *vector, Cardinal *count);
-static void subtract(Widget w, XEvent *e, String *vector, Cardinal *count);
-static void sum(Widget w, XEvent *e, String *vector, Cardinal *count);
-static void tangent(Widget w, XEvent *e, String *vector, Cardinal *count);
-static void tenpower(Widget w, XEvent *e, String *vector, Cardinal *count);
-static void XexchangeY(Widget w, XEvent *e, String *vector, Cardinal *count);
+static void add(Widget w, XEvent *ev, String *vector, Cardinal *count);
+static void back(Widget w, XEvent *ev, String *vector, Cardinal *count);
+static void bell(Widget w, XEvent *ev, String *vector, Cardinal *count);
+static void clearit(Widget w, XEvent *ev, String *vector, Cardinal *count);
+static void cosine(Widget w, XEvent *ev, String *vector, Cardinal *count);
+static void decimal(Widget w, XEvent *ev, String *vector, Cardinal *count);
+static void degree(Widget w, XEvent *ev, String *vector, Cardinal *count);
+static void digit(Widget w, XEvent *ev, String *vector, Cardinal *count);
+static void divide(Widget w, XEvent *ev, String *vector, Cardinal *count);
+static void e(Widget w, XEvent *ev, String *vector, Cardinal *count);
+static void enter(Widget w, XEvent *ev, String *vector, Cardinal *count);
+static void epower(Widget w, XEvent *ev, String *vector, Cardinal *count);
+static void equal(Widget w, XEvent *ev, String *vector, Cardinal *count);
+static void exchange(Widget w, XEvent *ev, String *vector, Cardinal *count);
+static void factorial(Widget w, XEvent *ev, String *vector, Cardinal *count);
+static void inverse(Widget w, XEvent *ev, String *vector, Cardinal *count);
+static void leftParen(Widget w, XEvent *ev, String *vector, Cardinal *count);
+static void logarithm(Widget w, XEvent *ev, String *vector, Cardinal *count);
+static void multiply(Widget w, XEvent *ev, String *vector, Cardinal *count);
+static void naturalLog(Widget w, XEvent *ev, String *vector, Cardinal *count);
+static void negate(Widget w, XEvent *ev, String *vector, Cardinal *count);
+static void nop(Widget w, XEvent *ev, String *vector, Cardinal *count);
+static void off(Widget w, XEvent *ev, String *vector, Cardinal *count);
+static void pi(Widget w, XEvent *ev, String *vector, Cardinal *count);
+static void power(Widget w, XEvent *ev, String *vector, Cardinal *count);
+static void quit(Widget w, XEvent *ev, String *vector, Cardinal *count);
+static void recall(Widget w, XEvent *ev, String *vector, Cardinal *count);
+static void reciprocal(Widget w, XEvent *ev, String *vector, Cardinal *count);
+static void rightParen(Widget w, XEvent *ev, String *vector, Cardinal *count);
+static void roll(Widget w, XEvent *ev, String *vector, Cardinal *count);
+static void scientific(Widget w, XEvent *ev, String *vector, Cardinal *count);
+static void selection(Widget w, XEvent *ev, String *vector, Cardinal *count);
+static void sine(Widget w, XEvent *ev, String *vector, Cardinal *count);
+static void square(Widget w, XEvent *ev, String *vector, Cardinal *count);
+static void squareRoot(Widget w, XEvent *ev, String *vector, Cardinal *count);
+static void store(Widget w, XEvent *ev, String *vector, Cardinal *count);
+static void subtract(Widget w, XEvent *ev, String *vector, Cardinal *count);
+static void sum(Widget w, XEvent *ev, String *vector, Cardinal *count);
+static void tangent(Widget w, XEvent *ev, String *vector, Cardinal *count);
+static void tenpower(Widget w, XEvent *ev, String *vector, Cardinal *count);
+static void XexchangeY(Widget w, XEvent *ev, String *vector, Cardinal *count);
 
 /*
  * 	calculator action table
@@ -138,7 +138,7 @@ XtActionsRec	Actions[] = {
 int ActionsCount = XtNumber(Actions);
 
 /*ARGSUSED*/
-static void add(Widget w, XEvent *e, String *vector, Cardinal *count)
+static void add(Widget w, XEvent *ev, String *vector, Cardinal *count)
 {
     XCALC_PRE_OP(kADD);
     rpn ? twof(kADD) : twoop(kADD);
@@ -146,7 +146,7 @@ static void add(Widget w, XEvent *e, String *vector, Cardinal *count)
 }
 
 /*ARGSUSED*/
-static void back(Widget w, XEvent *e, String *vector, Cardinal *count)
+static void back(Widget w, XEvent *ev, String *vector, Cardinal *count)
 {
     XCALC_PRE_OP(kBKSP);
     bkspf();
@@ -154,13 +154,13 @@ static void back(Widget w, XEvent *e, String *vector, Cardinal *count)
 }
 
 /*ARGSUSED*/
-static void bell(Widget w, XEvent *e, String *vector, Cardinal *count)
+static void bell(Widget w, XEvent *ev, String *vector, Cardinal *count)
 {
     ringbell();
 }
 
 /*ARGSUSED*/
-static void clearit(Widget w, XEvent *e, String *vector, Cardinal *count)
+static void clearit(Widget w, XEvent *ev, String *vector, Cardinal *count)
 {
     XCALC_PRE_OP(kCLR);
     clearf();
@@ -168,7 +168,7 @@ static void clearit(Widget w, XEvent *e, String *vector, Cardinal *count)
 }
 
 /*ARGSUSED*/
-static void cosine(Widget w, XEvent *e, String *vector, Cardinal *count)
+static void cosine(Widget w, XEvent *ev, String *vector, Cardinal *count)
 {
     XCALC_PRE_OP(kCOS);
     oneop(kCOS);
@@ -176,7 +176,7 @@ static void cosine(Widget w, XEvent *e, String *vector, Cardinal *count)
 }
 
 /*ARGSUSED*/
-static void decimal(Widget w, XEvent *e, String *vector, Cardinal *count)
+static void decimal(Widget w, XEvent *ev, String *vector, Cardinal *count)
 {
     XCALC_PRE_OP(kDEC);
     decf();
@@ -184,7 +184,7 @@ static void decimal(Widget w, XEvent *e, String *vector, Cardinal *count)
 }
 
 /*ARGSUSED*/
-static void degree(Widget w, XEvent *e, String *vector, Cardinal *count)
+static void degree(Widget w, XEvent *ev, String *vector, Cardinal *count)
 {
     XCALC_PRE_OP(kDRG);
     drgf();
@@ -192,7 +192,7 @@ static void degree(Widget w, XEvent *e, String *vector, Cardinal *count)
 }
 
 /*ARGSUSED*/
-static void digit(Widget w, XEvent *e, String *vector, Cardinal *count)
+static void digit(Widget w, XEvent *ev, String *vector, Cardinal *count)
 {
     switch (vector[0][0])
     {
@@ -211,7 +211,7 @@ static void digit(Widget w, XEvent *e, String *vector, Cardinal *count)
 }
 
 /*ARGSUSED*/
-static void divide(Widget w, XEvent *e, String *vector, Cardinal *count)
+static void divide(Widget w, XEvent *ev, String *vector, Cardinal *count)
 {
     XCALC_PRE_OP(kDIV);
     rpn  ? twof(kDIV) : twoop(kDIV);
@@ -219,7 +219,7 @@ static void divide(Widget w, XEvent *e, String *vector, Cardinal *count)
 }
 
 /*ARGSUSED*/
-static void e(Widget w, XEvent *e, String *vector, Cardinal *count)
+static void e(Widget w, XEvent *ev, String *vector, Cardinal *count)
 {
     XCALC_PRE_OP(kE);
     oneop(kE);
@@ -227,7 +227,7 @@ static void e(Widget w, XEvent *e, String *vector, Cardinal *count)
 }
 
 /*ARGSUSED*/
-static void enter(Widget w, XEvent *e, String *vector, Cardinal *count)
+static void enter(Widget w, XEvent *ev, String *vector, Cardinal *count)
 {
     XCALC_PRE_OP(kENTR);
     entrf();
@@ -235,7 +235,7 @@ static void enter(Widget w, XEvent *e, String *vector, Cardinal *count)
 }
 
 /*ARGSUSED*/
-static void epower(Widget w, XEvent *e, String *vector, Cardinal *count)
+static void epower(Widget w, XEvent *ev, String *vector, Cardinal *count)
 {
     XCALC_PRE_OP(kEXP);
     oneop(kEXP);
@@ -243,7 +243,7 @@ static void epower(Widget w, XEvent *e, String *vector, Cardinal *count)
 }
 
 /*ARGSUSED*/
-static void equal(Widget w, XEvent *e, String *vector, Cardinal *count)
+static void equal(Widget w, XEvent *ev, String *vector, Cardinal *count)
 {
     XCALC_PRE_OP(kEQU);
     equf();
@@ -251,7 +251,7 @@ static void equal(Widget w, XEvent *e, String *vector, Cardinal *count)
 }
 
 /*ARGSUSED*/
-static void exchange(Widget w, XEvent *e, String *vector, Cardinal *count)
+static void exchange(Widget w, XEvent *ev, String *vector, Cardinal *count)
 {
     XCALC_PRE_OP(kEXC);
     oneop(kEXC);
@@ -259,7 +259,7 @@ static void exchange(Widget w, XEvent *e, String *vector, Cardinal *count)
 }
 
 /*ARGSUSED*/
-static void factorial(Widget w, XEvent *e, String *vector, Cardinal *count)
+static void factorial(Widget w, XEvent *ev, String *vector, Cardinal *count)
 {
     XCALC_PRE_OP(kFACT);
     oneop(kFACT);
@@ -267,7 +267,7 @@ static void factorial(Widget w, XEvent *e, String *vector, Cardinal *count)
 }
 
 /*ARGSUSED*/
-static void inverse(Widget w, XEvent *e, String *vector, Cardinal *count)
+static void inverse(Widget w, XEvent *ev, String *vector, Cardinal *count)
 {
     XCALC_PRE_OP(kINV);
     invf();
@@ -275,7 +275,7 @@ static void inverse(Widget w, XEvent *e, String *vector, Cardinal *count)
 }
 
 /*ARGSUSED*/
-static void leftParen(Widget w, XEvent *e, String *vector, Cardinal *count)
+static void leftParen(Widget w, XEvent *ev, String *vector, Cardinal *count)
 {
     XCALC_PRE_OP(kLPAR);
     lparf();
@@ -283,7 +283,7 @@ static void leftParen(Widget w, XEvent *e, String *vector, Cardinal *count)
 }
 
 /*ARGSUSED*/
-static void logarithm(Widget w, XEvent *e, String *vector, Cardinal *count)
+static void logarithm(Widget w, XEvent *ev, String *vector, Cardinal *count)
 {
     XCALC_PRE_OP(kLOG);
     oneop(kLOG);
@@ -291,7 +291,7 @@ static void logarithm(Widget w, XEvent *e, String *vector, Cardinal *count)
 }
 
 /*ARGSUSED*/
-static void multiply(Widget w, XEvent *e, String *vector, Cardinal *count)
+static void multiply(Widget w, XEvent *ev, String *vector, Cardinal *count)
 {
     XCALC_PRE_OP(kMUL);
     rpn ? twof(kMUL) : twoop(kMUL);
@@ -299,7 +299,7 @@ static void multiply(Widget w, XEvent *e, String *vector, Cardinal *count)
 }
 
 /*ARGSUSED*/
-static void naturalLog(Widget w, XEvent *e, String *vector, Cardinal *count)
+static void naturalLog(Widget w, XEvent *ev, String *vector, Cardinal *count)
 {
     XCALC_PRE_OP(kLN);
     oneop(kLN);
@@ -307,7 +307,7 @@ static void naturalLog(Widget w, XEvent *e, String *vector, Cardinal *count)
 }
 
 /*ARGSUSED*/
-static void negate(Widget w, XEvent *e, String *vector, Cardinal *count)
+static void negate(Widget w, XEvent *ev, String *vector, Cardinal *count)
 {
     XCALC_PRE_OP(kNEG);
     negf();
@@ -315,13 +315,13 @@ static void negate(Widget w, XEvent *e, String *vector, Cardinal *count)
 }
 
 /*ARGSUSED*/
-static void nop(Widget w, XEvent *e, String *vector, Cardinal *count)
+static void nop(Widget w, XEvent *ev, String *vector, Cardinal *count)
 {
     ringbell();
 }
 
 /*ARGSUSED*/
-static void off(Widget w, XEvent *e, String *vector, Cardinal *count)
+static void off(Widget w, XEvent *ev, String *vector, Cardinal *count)
 {
     XCALC_PRE_OP(kOFF);
     offf();
@@ -329,7 +329,7 @@ static void off(Widget w, XEvent *e, String *vector, Cardinal *count)
 }
 
 /*ARGSUSED*/
-static void pi(Widget w, XEvent *e, String *vector, Cardinal *count)
+static void pi(Widget w, XEvent *ev, String *vector, Cardinal *count)
 {
     XCALC_PRE_OP(kPI);
     oneop(kPI);
@@ -337,7 +337,7 @@ static void pi(Widget w, XEvent *e, String *vector, Cardinal *count)
 }
 
 /*ARGSUSED*/
-static void power(Widget w, XEvent *e, String *vector, Cardinal *count)
+static void power(Widget w, XEvent *ev, String *vector, Cardinal *count)
 {
     XCALC_PRE_OP(kPOW);
     rpn ? twof(kPOW) : twoop(kPOW);
@@ -345,16 +345,16 @@ static void power(Widget w, XEvent *e, String *vector, Cardinal *count)
 }
 
 /*ARGSUSED*/
-static void quit(Widget w, XEvent *e, String *vector, Cardinal *count)
+static void quit(Widget w, XEvent *ev, String *vector, Cardinal *count)
 {
-    if (e->type == ClientMessage && e->xclient.data.l[0] != wm_delete_window)
+    if (ev->type == ClientMessage && ev->xclient.data.l[0] != wm_delete_window)
 	ringbell();
     else
 	Quit();
 }
 
 /*ARGSUSED*/
-static void recall(Widget w, XEvent *e, String *vector, Cardinal *count)
+static void recall(Widget w, XEvent *ev, String *vector, Cardinal *count)
 {
     XCALC_PRE_OP(kRCL);
     rpn ? memf(kRCL) : oneop(kRCL);
@@ -362,7 +362,7 @@ static void recall(Widget w, XEvent *e, String *vector, Cardinal *count)
 }
 
 /*ARGSUSED*/
-static void reciprocal(Widget w, XEvent *e, String *vector, Cardinal *count)
+static void reciprocal(Widget w, XEvent *ev, String *vector, Cardinal *count)
 {
     XCALC_PRE_OP(kRECIP);
     oneop(kRECIP);
@@ -370,7 +370,7 @@ static void reciprocal(Widget w, XEvent *e, String *vector, Cardinal *count)
 }
 
 /*ARGSUSED*/
-static void rightParen(Widget w, XEvent *e, String *vector, Cardinal *count)
+static void rightParen(Widget w, XEvent *ev, String *vector, Cardinal *count)
 {
     XCALC_PRE_OP(kRPAR);
     rparf();
@@ -378,7 +378,7 @@ static void rightParen(Widget w, XEvent *e, String *vector, Cardinal *count)
 }
 
 /*ARGSUSED*/
-static void roll(Widget w, XEvent *e, String *vector, Cardinal *count)
+static void roll(Widget w, XEvent *ev, String *vector, Cardinal *count)
 {
     XCALC_PRE_OP(kROLL);
     rollf();
@@ -386,7 +386,7 @@ static void roll(Widget w, XEvent *e, String *vector, Cardinal *count)
 }
 
 /*ARGSUSED*/
-static void scientific(Widget w, XEvent *e, String *vector, Cardinal *count)
+static void scientific(Widget w, XEvent *ev, String *vector, Cardinal *count)
 {
     XCALC_PRE_OP(kEE);
     eef();
@@ -394,13 +394,13 @@ static void scientific(Widget w, XEvent *e, String *vector, Cardinal *count)
 }
 
 /*ARGSUSED*/
-static void selection(Widget w, XEvent *e, String *vector, Cardinal *count)
+static void selection(Widget w, XEvent *ev, String *vector, Cardinal *count)
 {
-    do_select(((XButtonReleasedEvent *)e)->time);
+    do_select(((XButtonReleasedEvent *)ev)->time);
 }
 
 /*ARGSUSED*/
-static void sine(Widget w, XEvent *e, String *vector, Cardinal *count)
+static void sine(Widget w, XEvent *ev, String *vector, Cardinal *count)
 {
     XCALC_PRE_OP(kSIN);
     oneop(kSIN);
@@ -408,7 +408,7 @@ static void sine(Widget w, XEvent *e, String *vector, Cardinal *count)
 }
 
 /*ARGSUSED*/
-static void square(Widget w, XEvent *e, String *vector, Cardinal *count)
+static void square(Widget w, XEvent *ev, String *vector, Cardinal *count)
 {
     XCALC_PRE_OP(kSQR);
     oneop(kSQR);
@@ -416,7 +416,7 @@ static void square(Widget w, XEvent *e, String *vector, Cardinal *count)
 }
 
 /*ARGSUSED*/
-static void squareRoot(Widget w, XEvent *e, String *vector, Cardinal *count)
+static void squareRoot(Widget w, XEvent *ev, String *vector, Cardinal *count)
 {
     XCALC_PRE_OP(kSQRT);
     oneop(kSQRT);
@@ -424,7 +424,7 @@ static void squareRoot(Widget w, XEvent *e, String *vector, Cardinal *count)
 }
 
 /*ARGSUSED*/
-static void store(Widget w, XEvent *e, String *vector, Cardinal *count)
+static void store(Widget w, XEvent *ev, String *vector, Cardinal *count)
 {
     XCALC_PRE_OP(kSTO);
     rpn ? memf(kSTO) : oneop(kSTO);
@@ -432,7 +432,7 @@ static void store(Widget w, XEvent *e, String *vector, Cardinal *count)
 }
 
 /*ARGSUSED*/
-static void subtract(Widget w, XEvent *e, String *vector, Cardinal *count)
+static void subtract(Widget w, XEvent *ev, String *vector, Cardinal *count)
 {
     XCALC_PRE_OP(kSUB);
     rpn ? twof(kSUB) : twoop(kSUB);
@@ -440,7 +440,7 @@ static void subtract(Widget w, XEvent *e, String *vector, Cardinal *count)
 }
 
 /*ARGSUSED*/
-static void sum(Widget w, XEvent *e, String *vector, Cardinal *count)
+static void sum(Widget w, XEvent *ev, String *vector, Cardinal *count)
 {
     XCALC_PRE_OP(kSUM);
     rpn ? memf(kSUM) : oneop(kSUM);
@@ -448,7 +448,7 @@ static void sum(Widget w, XEvent *e, String *vector, Cardinal *count)
 }
 
 /*ARGSUSED*/
-static void tangent(Widget w, XEvent *e, String *vector, Cardinal *count)
+static void tangent(Widget w, XEvent *ev, String *vector, Cardinal *count)
 {
     XCALC_PRE_OP(kTAN);
     oneop(kTAN);
@@ -456,7 +456,7 @@ static void tangent(Widget w, XEvent *e, String *vector, Cardinal *count)
 }
 
 /*ARGSUSED*/
-static void tenpower(Widget w, XEvent *e, String *vector, Cardinal *count)
+static void tenpower(Widget w, XEvent *ev, String *vector, Cardinal *count)
 {
     XCALC_PRE_OP(k10X);
     oneop(k10X);
@@ -464,7 +464,7 @@ static void tenpower(Widget w, XEvent *e, String *vector, Cardinal *count)
 }
 
 /*ARGSUSED*/
-static void XexchangeY(Widget w, XEvent *e, String *vector, Cardinal *count)
+static void XexchangeY(Widget w, XEvent *ev, String *vector, Cardinal *count)
 {
     XCALC_PRE_OP(kXXY);
     twof(kXXY);
