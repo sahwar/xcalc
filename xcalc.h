@@ -122,8 +122,8 @@ extern XtActionsRec Actions[];
 extern int ActionsCount;
 
 /* math.c */
-extern signal_t fperr(int sig);
-extern signal_t illerr(int sig);
+extern signal_t fperr(int sig) _X_NORETURN;
+extern signal_t illerr(int sig) _X_NORETURN;
 extern void fail_op(void);
 extern int pre_op(int keynum);
 extern void post_op(void);
@@ -155,7 +155,7 @@ extern jmp_buf env;
 /* xcalc.c */
 extern void do_select(Time time);
 extern void draw(char *string);
-extern void Quit(void);
+extern void Quit(void) _X_NORETURN;
 extern void ringbell(void);
 extern void setflag(int indicator, Boolean on);
 
