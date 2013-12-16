@@ -56,11 +56,7 @@ from the X Consortium.
 #include <X11/Xlocale.h>
 
 
-#ifdef SIGNALRETURNSINT
-#define signal_t int
-#else
 #define signal_t void
-#endif
 
 #define kRECIP 0	/* reciprocal */
 #define kSQR   1	/* square */
