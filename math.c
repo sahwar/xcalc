@@ -144,7 +144,7 @@ void fail_op(void)
 }
 
 /*ARGSUSED*/
-signal_t fperr(int sig)
+void fperr(int sig)
 {
 #if defined(SYSV) || defined(SVR4) || defined(linux)
     signal(SIGFPE, fperr);
@@ -155,7 +155,7 @@ signal_t fperr(int sig)
 
 /* for VAX BSD4.3 */
 /*ARGSUSED*/
-signal_t illerr(int sig)
+void illerr(int sig)
 {
     /* not reset when caught? */
     signal(SIGILL, illerr);

@@ -55,9 +55,6 @@ from the X Consortium.
 #include <errno.h>
 #include <X11/Xlocale.h>
 
-
-#define signal_t void
-
 #define kRECIP 0	/* reciprocal */
 #define kSQR   1	/* square */
 #define kSQRT  2	/* square root */
@@ -118,8 +115,8 @@ extern XtActionsRec Actions[];
 extern int ActionsCount;
 
 /* math.c */
-extern signal_t fperr(int sig) _X_NORETURN;
-extern signal_t illerr(int sig) _X_NORETURN;
+extern void fperr(int sig) _X_NORETURN;
+extern void illerr(int sig) _X_NORETURN;
 extern void fail_op(void);
 extern int pre_op(int keynum);
 extern void post_op(void);
