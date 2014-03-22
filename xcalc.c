@@ -74,7 +74,7 @@ static Display	*dpy = NULL;		/* connection to the X server */
 static Widget	toplevel=NULL;  	/* top level shell widget */
 static Widget   calculator=NULL;	/* an underlying form widget */
 static Widget	LCD = NULL;		/* liquid crystal display */
-static Widget	ind[6];			/* mode indicators in the screen */
+static Widget	ind[9];			/* mode indicators in the screen */
 static char	selstr[LCD_STR_LEN]; /* storage for selections from the LCD */
 					/* checkerboard used in mono mode */
 static XtAppContext xtcontext;		/* Toolkit application context */
@@ -221,6 +221,18 @@ static void create_display(Widget parent)
     /* () - the parenthesis indicator */
     ind[XCalc_PAREN] = XtCreateManagedWidget("P", labelWidgetClass, screen,
 					     args, XtNumber(args));
+
+    /* HEX - the hexadecimal (base 16) indicator */
+    ind[XCalc_HEX] = XtCreateManagedWidget("HEX", labelWidgetClass, screen,
+					     args, XtNumber(args));
+
+    /* DEC - the hexadecimal (base 16) indicator */
+    ind[XCalc_DEC] = XtCreateManagedWidget("DEC", labelWidgetClass, screen,
+					     args, XtNumber(args));
+
+    /* OCT - the octal (base 8) indicator */
+    ind[XCalc_OCT] = XtCreateManagedWidget("OCT", labelWidgetClass, screen,
+					     args, XtNumber(args));
 }
 
 /*
@@ -240,7 +252,10 @@ static void create_keypad(Widget parent)
 	"button21","button22","button23","button24","button25",
 	"button26","button27","button28","button29","button30",
 	"button31","button32","button33","button34","button35",
-	"button36","button37","button38","button39","button40"
+	"button36","button37","button38","button39","button40",
+	"button41","button42","button43","button44","button45",
+	"button46","button47","button48","button49","button50",
+	"button51","button52","button53","button54","button55",
 	};
     register int i;
     int		 n = XtNumber(Keyboard);
