@@ -186,7 +186,7 @@ static void
 DrawDisplay(void)
 {
     if (strlen(dispstr) > 12) {           /* strip out some decimal digits */
-        char *estr = index(dispstr,'e');  /* search for exponent part */
+        char *estr = strchr(dispstr,'e'); /* search for exponent part */
         if (!estr) dispstr[12]='\0';      /* no exp, just trunc. */
         else {
             char tmp[32];
